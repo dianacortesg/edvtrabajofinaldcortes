@@ -116,40 +116,71 @@ Desarrollar un análisis de datos y un dashboard interactivo sobre ciberataques 
 ### b. ARQUITECTURA DE DATOS
 ![Arquitectura Medallón](images/medall.png)  
 
-### c. CAPA BRONZE
-![Carga CSV en BigQuery](images/1capbigq.png)
+## 🥉 C. CAPA BRONZE
 
-### d. CAPA SILVER
-![Tabla Silver](images/2capbigq.png)
+Se creó un proyecto en **BigQuery** con el nombre de `bronzedianacortes`, y en él se crearon dos conjuntos de datos:  
+- Uno para la **capa Bronze**  
+- Otro para las **tablas de la capa Silver**  
 
----
+No se crearon dos proyectos diferentes ya que de esta forma fue más práctico y no se registraron impedimentos por orígenes y vinculaciones, como sí ocurrió al intentar hacerlo en proyectos distintos. Esto fue comentado con uno de los instructores en una de las clases, quien refirió que no habría problema alguno.  
 
-# 6. 🗂️ DER: Modelo Entidad Relacionales
-![DER](images/der.png)
+La carga de datos se realizó a partir de un archivo **CSV**.  
+Previo a su ingesta en BigQuery, se ajustaron los nombres de dos columnas directamente en Excel, ya que contenían caracteres especiales no reconocidos por el motor de BigQuery, lo cual impedía la correcta carga del archivo.  
 
----
+![Carga Bronze](images/1capbigq.png)
 
-# 7. 🥈 Construcción capa Silver
-Proceso de limpieza, estandarización y creación de dimensiones clave.  
-- Revisión de duplicados semánticos  
-- Verificación de nombres de columnas  
-- Ajuste de cardinalidades  
-- Creación de tabla **Amenazas_Globales_Silver**  
+👉 **Resultado:** El archivo cargó en su totalidad.  
+![Carga Bronze](images/2capbigq.png)
 
 ---
 
-# 8. 📊 Conexión y desarrollo en PowerBI
-![Dashboard Power BI](images/dashboard-powerbi.png)
+## 🥈 D. CAPA SILVER
+
+**Limpieza de datos:**  
+A lo largo del proyecto se realizó un proceso de limpieza y preparación del *Global Cybersecurity Threats Dataset (2015–2024)* para asegurar su consistencia y usabilidad en BigQuery y Power BI.  
+
+### 🔧 Principales etapas
+- **Revisión y estandarización de columnas**  
+  - Se aplicaron funciones de estandarización (`LOWER`, `TRIM`, `REGEXP_REPLACE`) en BigQuery para identificar categorías con variaciones de escritura.  
+  - El análisis mostró que los tipos de ataque ya se encontraban homogéneos.  
+  - Se verificaron los nombres de las columnas y se renombraron para mantener un formato estándar.  
+
+- **Tratamiento de valores faltantes**  
+  - No se identificaron campos con valores nulos.  
+  - Los nombres de países ya estaban estandarizados.  
+  - Se verificó que el modelo de datos se conectara correctamente con BigQuery.  
+  - Se revisaron las relaciones entre tablas y se ajustaron cardinalidades.  
+  - Se creó la tabla **Silver** con datos limpios y nombres estándar.  
+  - No fue necesario realizar conversiones de fechas, ya que el dataset solo incluía la variable **AÑO**.  
+
+### 📊 Tabla Silver Original
+La tabla `Amenazas_Globales_Silver` se creó para asegurar datos limpios, consistentes y listos para análisis, actuando como la base sólida necesaria para construir un modelo confiable y un Dashboard analítico de ciberseguridad.  
+Los nombres de las columnas se tradujeron a Español.  
+
+👉 **Nota:** Todas las columnas fueron útiles para el análisis, por lo que se consideraron en su totalidad.  
+![Tabla Silver](images/capa-silver.png)
 
 ---
 
-# 9. 🧮 Medidas en DAX
-*(Aquí puedes añadir tus fórmulas DAX si lo deseas)*  
+## 🗂️ Tablas Dimensionales
+
+Se crearon **cinco tablas dimensionales en BigQuery** y con ellas la **tabla FACT**, todas con lenguaje SQL.  
+A cada tabla se le asignó una columna adicional de **ID** que funcionó como *Primary Key* en la tabla FACT, esto por sugerencia del instructor y como forma de generar un análisis más limpio y preciso.  
+
+- **DIM_DATE**  
+- **DIM_PAIS**  
+- **DIM_ATTACK**  
+  - Para ataques, se tomaron tres categorías originales (*Tipo de ataque, Fuente del ataque, Tipo de vulnerabilidad*) y se fusionaron, asignando un código único a cada combinación distinta.  
+  - Esto simplificó las dimensiones.  
+- **DIM_DEFENSA**  
+- **DIM_INDUSTRIA**  
 
 ---
 
-# 10. ✅ Conclusiones
-- Patrones claros de concentración geográfica y sectores vulnerables.  
-- Impactos económicos y sociales medibles para priorizar políticas.  
-- Análisis de defensas orienta mejoras operativas.  
-- BigQuery + Power BI soportan dashboards confiables y accionables.  
+## ⭐ Tabla FACT (Hechos)
+
+- La tabla `FACT_Cyberthreats` centraliza los datos y los relaciona con las diferentes tablas dimensionales por medio de las claves asignadas.  
+- La construcción de esta tabla fue esencial para estructurar el **modelo estrella** de análisis de datos, ya que permitió transformar un dataset disperso y heterogéneo en un esquema sólido, relacional y listo para explorar tendencias, patrones de ataque y efectos económicos y sociales dentro del panorama de amenazas cibernéticas.  
+- Se agregaron columnas con título **“raw”** para identificar cada uno de los nombres y categorías a las que se les había asignado un ID.  
+
+![Tabla FACT](images/fact-cyberthreats.png)
