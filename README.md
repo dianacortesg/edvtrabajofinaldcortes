@@ -127,7 +127,7 @@ No se crearon dos proyectos diferentes ya que de esta forma fue más práctico y
 La carga de datos se realizó a partir de un archivo **CSV**.  
 Previo a su ingesta en BigQuery, se ajustaron los nombres de dos columnas directamente en Excel, ya que contenían caracteres especiales no reconocidos por el motor de BigQuery, lo cual impedía la correcta carga del archivo.  
 
-![Carga Bronze](images/1capbigq.png)
+![Carga Bronze](images/1capqbigq.png)
 
 👉 **Resultado:** El archivo cargó en su totalidad.  
 ![Carga Bronze](images/2capbigq.png)
@@ -141,17 +141,40 @@ A lo largo del proyecto se realizó un proceso de limpieza y preparación del *G
 
 ### 🔧 Principales etapas
 - **Revisión y estandarización de columnas**  
-  - Se aplicaron funciones de estandarización (`LOWER`, `TRIM`, `REGEXP_REPLACE`) en BigQuery para identificar categorías con variaciones de escritura.  
-  - El análisis mostró que los tipos de ataque ya se encontraban homogéneos.  
-  - Se verificaron los nombres de las columnas y se renombraron para mantener un formato estándar.  
+  - Se aplicaron funciones de estandarización (`LOWER`, `TRIM`, `REGEXP_REPLACE`) en BigQuery para identificar categorías con variaciones de escritura.
+  - El análisis mostró que los tipos de ataque ya se encontraban homogéneos.
+  - ![Carga Bronze](images/cap4.jpg) 
+  - Se verificaron los nombres de las columnas y se renombraron para mantener un formato estándar.
+ ![Carga Bronze](images/3capbigq.png)
 
 - **Tratamiento de valores faltantes**  
-  - No se identificaron campos con valores nulos.  
+  - No se identificaron campos con valores nulos.
+   - ![Carga Bronze](images/cap5.png) 
+     
   - Los nombres de países ya estaban estandarizados.  
   - Se verificó que el modelo de datos se conectara correctamente con BigQuery.  
   - Se revisaron las relaciones entre tablas y se ajustaron cardinalidades.  
-  - Se creó la tabla **Silver** con datos limpios y nombres estándar.  
-  - No fue necesario realizar conversiones de fechas, ya que el dataset solo incluía la variable **AÑO**.  
+  - Se creó la tabla **Silver** con datos limpios y nombres estándar.
+  - - ![Carga Bronze](images/cap6.png)  
+  - No fue necesario realizar conversiones de fechas, ya que el dataset solo incluía la variable **AÑO**.
+    
+```sql
+CREATE OR REPLACE TABLE `bronzedianacortes.Cyberthreats_Silver.Amenazas_Globales_Silver` AS
+SELECT
+    Pais,
+    Anio,
+    Tipo_Ataque,
+    Fuente_Ataque,
+    Vulnerabilidad,
+    Industria,
+    Mecanismo_Defensa,
+    CAST(Perdida_Millones_USD AS FLOAT64) AS Perdida_Millones_USD,
+    CAST(Usuarios_Afectados AS INT64) AS Usuarios_Afectados,
+    CAST(Tiempo_Resolucion_Horas AS FLOAT64) AS Tiempo_Resolucion_Horas
+FROM `bronzedianacortes.Cyberthreats_Bronze.Amenazas_Globales`;
+```
+
+
 
 ### 📊 Tabla Silver Original
 La tabla `Amenazas_Globales_Silver` se creó para asegurar datos limpios, consistentes y listos para análisis, actuando como la base sólida necesaria para construir un modelo confiable y un Dashboard analítico de ciberseguridad.  
