@@ -181,7 +181,7 @@ La tabla `Amenazas_Globales_Silver` se creó para asegurar datos limpios, consis
 Los nombres de las columnas se tradujeron a Español.  
 
 👉 **Nota:** Todas las columnas fueron útiles para el análisis, por lo que se consideraron en su totalidad.  
-![Tabla Silver](images/capa-silver.png)
+![Tabla Silver](images/cap6.png)
 
 ---
 
@@ -190,13 +190,18 @@ Los nombres de las columnas se tradujeron a Español.
 Se crearon **cinco tablas dimensionales en BigQuery** y con ellas la **tabla FACT**, todas con lenguaje SQL.  
 A cada tabla se le asignó una columna adicional de **ID** que funcionó como *Primary Key* en la tabla FACT, esto por sugerencia del instructor y como forma de generar un análisis más limpio y preciso.  
 
-- **DIM_DATE**  
-- **DIM_PAIS**  
+- **DIM_DATE**
+- ![Carga Bronze](images/dimdate.jpg) 
+- **DIM_PAIS**
+- ![Carga Bronze](images/dimpais.jpg) 
 - **DIM_ATTACK**  
-  - Para ataques, se tomaron tres categorías originales (*Tipo de ataque, Fuente del ataque, Tipo de vulnerabilidad*) y se fusionaron, asignando un código único a cada combinación distinta.  
+  - Para ataques, se tomaron tres categorías originales (*Tipo de ataque, Fuente del ataque, Tipo de vulnerabilidad*) y se fusionaron, asignando un código único a cada combinación distinta.
+  - ![Carga Bronze](images/dimataack.jpg) 
   - Esto simplificó las dimensiones.  
-- **DIM_DEFENSA**  
-- **DIM_INDUSTRIA**  
+- **DIM_DEFENSA**
+- ![Carga Bronze](images/dimdefensa.jpg) 
+- **DIM_INDUSTRIA**
+- ![Carga Bronze](images/dimindustria.jpg) 
 
 ---
 
