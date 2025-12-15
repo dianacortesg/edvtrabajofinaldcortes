@@ -520,5 +520,5 @@ Se utilizaron gráficos de barras, gráfios de líneas,treemap, gráficos circul
 - De manera consistente, el análisis operativo confirma la importancia crítica de la capacidad de respuesta: los ataques con menores tiempos promedio de resolución están asociados con menores pérdidas económicas, mientras que respuestas más lentas tienden a amplificar el daño financiero. Esto refuerza la idea de que, más allá de la prevención, la eficiencia en los mecanismos de defensa y mitigación juega un rol determinante en la reducción del impacto de los ciberataques, convirtiéndose en un factor estratégico clave para la gestión del riesgo cibernético.
 
 - ### 11. 📊 LINKS
-- 
+- DIANAEDVFINAL.pbix
 
