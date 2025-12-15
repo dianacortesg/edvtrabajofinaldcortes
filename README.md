@@ -2,16 +2,18 @@
 # 📊 Análisis de Ciberseguridad Global (2015–2024)
 
 ## 📑 TABLA DE CONTENIDOS
-1. [🚀 Presentación del proyecto](#-presentación-del-proyecto)
-2. [📂 Descripción del Dataset](#-descripción-del-dataset)
-3. [🎯 Objetivos e Hipótesis](#-objetivos-e-hipótesis)
-4. [📈 Plan de métricas KPI’s](#-plan-de-métricas-kpis)
-5. [🔍 EDA: Análisis Exploratorio de Datos](#-eda-análisis-exploratorio-de-datos)
+1. [🚀 Presentación del proyecto](#-presentacion-del-proyecto)
+2. [📂 Descripción del Dataset](#-descripcion-del-dataset)
+3. [🎯 Objetivos e Hipótesis](#-objetivos-e-hipotesis)
+4. [📈 Plan de métricas KPI’s](#-plan-de-metricas-kpis)
+5. [🔍 EDA: Análisis Exploratorio de Datos](#-eda-analisis-exploratorio-de-datos)
 6. [🗂️ DER: Modelo Entidad Relación](#-der-modelo-entidad-relacion)
 7. [📊 Conexión y desarrollo en PowerBI](#-conexión-y-desarrollo-en-powerbi)
 8. [🧮 Medidas en DAX](#-medidas-en-dax)
-9. [Analísis y discusión de resultados](#-analisis-y-discuisón-de-resultados)
+9. [Analísis y discusión de resultados](#-analisis-y-discuision-de-resultados
 10. [✅ Conclusiones](#-conclusiones)
+11. [✅ LINKS](#-LINKS)
+    
 
 ---
 
@@ -453,18 +455,44 @@ AVERAGE(FACT_CYBERTHREATS[Tiempo_Resolucion_Horas])
 El dashboard se organizó en páginas temáticas:
 
 👥 Portada
-- - ![Carga Bronze](images/PB5.png)
+![Carga Bronze](images/PB5.png)
+ 
+  - 👥 overview
+ 
+  - ![Carga Bronze](images/PB6.png)
+ - MAPA GEOGRAFICO : Gráfico de Muestra la proporción de ataques cibernéticos registrados en cada país respecto al total, permitiendo comparar su peso relativo dentro del conjunto analizado.
+ - ![Carga Bronze](images/3EFFE9A7-68DD-4346-A51B-EAE2091AED16.jpeg) ![Carga Bronze](images/MUNDO.png)
 
-📈 Incidencia
-- - ![Carga Bronze](images/PB6.png)
-    
+- TARJETAS KPI : se incluyen para mostrar de forma inmediata y clara los indicadores y m´tericas claves y más importantes, permitiendo tener un vistazo general.
+- ![Carga Bronze](images/botonkpi.png)  - ![Carga Bronze](images/KPIS.png)
+
+- GRAFICOS COMBIANDOS LÍNEAS Y BARRAS: para representar la frecuencia de los ataques y las pérdidas económicas en USD. Este enfoque permitió analizar de forma conjunta el volumen de ataques y su impacto económico según las dimensiones consideradas.
+- 
+- - - ![Carga Bronze](images/botonbarraslineas.png)- ![Carga Bronze](images/FRECUENCIAS.png)
+
+
+    📈 Incidencia
+
+- - ![Carga Bronze](images/INCIDENCIA.png)
+ 
+  - El gráfico de crecimiento interanual permite identificar cómo varía, en términos porcentuales, la frecuencia de ataques o las pérdidas económicas de un año a otro, facilitando la detección de tendencias de aumento o desaceleración.
+ 
+  - - - ![Carga Bronze](images/botonbarras.png)- ![Carga Bronze](images/INTERANUAL.png)
+ 
 💰 Impacto económico y social
 
 - - ![Carga Bronze](images/SOCIO.png)
+  - 
+ Se utilizaron gráficos combinados de barras y líneas para representar la frecuencia de los ataques y las pérdidas económicas en USD. Este enfoque permitió analizar de forma conjunta el volumen de ataques y su impacto económico según las dimensiones consideradas.
+
+  - - ![Carga Bronze](images/botonbarraslineas.png)- ![Carga Bronze](images/FRECUENCIAS.png)
 
 🛡️ Defensa
 - - ![Carga Bronze](images/DEF.png)
-
+  - 
+  - El heatmap en la matriz se incorporó para facilitar la identificación visual de patrones, concentraciones y contrastes entre categorías, permitiendo detectar rápidamente dónde se acumulan mayores valores de impacto o frecuencia sin necesidad de analizar cada cifra de forma individual.
+  - - - ![Carga Bronze](images/botonmatriz.png) - ![Carga Bronze](images/heatmaps.png)
+  - 
 Se utilizaron gráficos de barras, gráfios de líneas,treemap, gráficos circulares y tarjetas KPI.
 
 ### Dashboard desde el enfoque gráfico y de diseño
@@ -483,7 +511,7 @@ Se utilizaron gráficos de barras, gráfios de líneas,treemap, gráficos circul
 -🛡️Cuarta:El análisis de datos confirma que, dentro del conjunto analizado, existe una relación consistente entre los tiempos de resolución de los ataques y las pérdidas económicas promedio asociadas. Se observa que aquellos ataques que presentan menores tiempos promedio de resolución tienden a estar asociados con un menor impacto económico, mientras que los ataques con tiempos de respuesta más prolongados muestran, en promedio, pérdidas económicas más elevadas. En el caso de EEUU, con el menor tiempo de resolucion de 35,3H, las pérdidas oscilan ntre los 14.812 MILL USD mientras que Brasil, co el mayor tiempo 37,7H, presenta pérdidas de 15.782 Mill USD.
 
 
-- ### 📊 Conclusiones
+- ### 10. 📊 Conclusiones
   
 - El análisis del dataset Global Cybersecurity Threats (2015–2024) muestra que el impacto de los ciberataques tiende a distribuirse de manera relativamente homogénea, sin evidenciar diferencias abismales entre países, industrias o tipos de ataque dentro del alcance de los datos disponibles. No obstante, es posible identificar ciertos focos de concentración —como GB, EEUU, Brasil e india  así como los sectores de banca e IT— que destacan de forma recurrente en términos de frecuencia, impacto económico y afectación social. Esto sugiere que las diferencias observadas deben interpretarse con cautela, pues la aparente uniformidad del fenómeno podría estar influida por limitaciones estructurales o sesgos del dataset. En consecuencia, los patrones identificados reflejan tendencias dentro del universo analizado, pero no necesariamente la magnitud real del fenómeno a escala global.
 
@@ -491,5 +519,6 @@ Se utilizaron gráficos de barras, gráfios de líneas,treemap, gráficos circul
 
 - De manera consistente, el análisis operativo confirma la importancia crítica de la capacidad de respuesta: los ataques con menores tiempos promedio de resolución están asociados con menores pérdidas económicas, mientras que respuestas más lentas tienden a amplificar el daño financiero. Esto refuerza la idea de que, más allá de la prevención, la eficiencia en los mecanismos de defensa y mitigación juega un rol determinante en la reducción del impacto de los ciberataques, convirtiéndose en un factor estratégico clave para la gestión del riesgo cibernético.
 
+- ### 11. 📊 LINKS
 - 
 
