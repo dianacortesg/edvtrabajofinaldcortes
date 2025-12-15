@@ -10,7 +10,7 @@
 6. [🗂️ DER: Modelo Entidad Relación](#-der-modelo-entidad-relacion)
 7. [📊 Conexión y desarrollo en PowerBI](#-conexión-y-desarrollo-en-powerbi)
 8. [🧮 Medidas en DAX](#-medidas-en-dax)
-9. [Analísis y discusión de resultados](#-analisis-y-discuision-de-resultados
+9. [Analísis y discusión de resultados](#-analisis-y-discuision-de-resultados)
 10. [✅ Conclusiones](#-conclusiones)
 11. [✅ LINKS](#-LINKS)
     
@@ -482,10 +482,6 @@ El dashboard se organizó en páginas temáticas:
 💰 Impacto económico y social
 
 - - ![Carga Bronze](images/SOCIO.png)
-  - 
- Se utilizaron gráficos combinados de barras y líneas para representar la frecuencia de los ataques y las pérdidas económicas en USD. Este enfoque permitió analizar de forma conjunta el volumen de ataques y su impacto económico según las dimensiones consideradas.
-
-  - - ![Carga Bronze](images/botonbarraslineas.png)- ![Carga Bronze](images/FRECUENCIAS.png)
 
 🛡️ Defensa
 - - ![Carga Bronze](images/DEF.png)
