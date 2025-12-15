@@ -303,7 +303,7 @@ FROM (
 - La construcción de esta tabla fue esencial para estructurar el **modelo estrella** de análisis de datos, ya que permitió crear un esquema sólido, relacional y para explorar tendencias, patrones de ataque y efectos económicos y sociales dentro del panorama de amenazas cibernéticas.  
 - Se agregaron columnas con título **“raw”** para identificar cada uno de los nombres y categorías a las que se les había asignado un ID.  
 
-![Tabla FACT](images/fact-tablafact.jpg)
+![Tabla FACT](images/tablafact.jpg)
 
 ```sql
 CREATE OR REPLACE TABLE `bronzedianacortes.Cyberthreats_Silver.FACT_CYBERTHREATS` AS
@@ -372,8 +372,8 @@ Power BI se conectó directamente al proyecto de BigQuery e importó las siguien
 - Esto con el fin de que cada código también sea reconocido desde el atque, fuente y vulnerabilidad que representa, sin crear confusión y para facilitar su graficación
 - ![Carga Bronze](images/PB4.png)
 
-- la tabla de fecha, que e este caso represneta la DIM_DATE generó algunos problemas de formato por lo qe se le asignó valor de numro entero, esto, sin mebargo, no interfiri´mayormente en este modelo de análisis
-- ![Carga Bronze](images/PB3.png)
+- la tabla de fecha, que en este caso represneta la DIM_DATE generó algunos problemas de formato por lo qe se le asignó valor de numro entero, esto, sin mebargo, no interfiri´mayormente en este modelo de análisis
+- - ![Carga Bronze](images/PB3.png)
 ---
 
 ### 🔗 Modelo entidad–relación
@@ -457,9 +457,13 @@ El dashboard se organizó en páginas temáticas:
 
 📈 Incidencia
 - - ![Carga Bronze](images/PB6.png)
+    
 💰 Impacto económico y social
 
+- - ![Carga Bronze](images/SOCIO.png)
+
 🛡️ Defensa
+- - ![Carga Bronze](images/DEF.png)
 
 Se utilizaron gráficos de barras, gráfios de líneas,treemap, gráficos circulares y tarjetas KPI.
 
@@ -469,19 +473,23 @@ Se utilizaron gráficos de barras, gráfios de líneas,treemap, gráficos circul
 - ### 📊 Análisis y discusión de resultados
 
 ## Comprobación de las hipótesis
-
-- 💸 Segunda:Los ataques más frecuentes generan mayores pérdidas económicas.  
-- 👥 Tercera:Algunas industrias concentran mayor impacto social.  
-- 🛡️ Cuarta: Mejores tiempos de respuesta reducen pérdidas económicas promedio.  
-
+ 
 -📌 Primera:Aunque el dataset es limitado y no permite afirmar diferencias abismales entre países, sí muestra que existen algunos países donde los ataques se concentran de manera notable. Los datos reflejan que, dentro del alcance del estudio, el fenómeno se distribuye de forma muy uniforme, pero es posible identificar los países más afectados (EEUU, Brasil e India) como focos principales del ciberataque. Esto, sin embargo, hay que analizarlo con cuidado, pues puede indicar que los datos podrían estar sesgados o incompletos, y que los patrones reales podrían diferir significativamente si se contaran incidentes no reportados o en regiones fuera del dataset.
+
+-💸 Segunda:La relación entre la frecuencia de los ataques y las pérdidas económicas solo se mantiene de forma consistente cuando se analiza el Tipo de Ataque de manera individual. En este nivel, los ataques más comunes concentran mayores pérdidas acumuladas. Sin embargo, al incorporar variables adicionales como la vulnerabilidad y la fuente del ataque, esta relación se diluye: algunos ataques frecuentes presentan pérdidas bajas, mientras que ataques menos comunes generan impactos económicos elevados. Esto evidencia que la relación entre frecuencia e impacto económico depende significativamente del nivel de granularidad del análisis.
+
+-👥Tercera: La tercera hipótesis se ve respaldada parcialmente, ya que el análisis del mapa de calor evidencia una mayor concentración del impacto social en los sectores de banking e IT. No obstante, las diferencias observadas respecto a los demás sectores no presentan una magnitud suficientemente elevada como para afirmar una brecha estadísticamente significativa, lo que sugiere una distribución relativamente homogénea del impacto social entre los distintos sectores analizados.
+
+-🛡️Cuarta:El análisis de datos confirma que, dentro del conjunto analizado, existe una relación consistente entre los tiempos de resolución de los ataques y las pérdidas económicas promedio asociadas. Se observa que aquellos ataques que presentan menores tiempos promedio de resolución tienden a estar asociados con un menor impacto económico, mientras que los ataques con tiempos de respuesta más prolongados muestran, en promedio, pérdidas económicas más elevadas. En el caso de EEUU, con el menor tiempo de resolucion de 35,3H, las pérdidas oscilan ntre los 14.812 MILL USD mientras que Brasil, co el mayor tiempo 37,7H, presenta pérdidas de 15.782 Mill USD.
 
 
 - ### 📊 Conclusiones
-- 
-- Aunque el dataset es limitado y no permite extrapolar a nivel global con total certeza, los datos muestran que hay países que concentran un mayor número de incidentes. Esto permite identificar focos principales de ciberataques.
-- 
-- Se evidencia uniformidad relativa del fenómeno dentro del alcance de la muestra, lo que resepresenta un llamado a verificar que no se hayan presnetado sesgos en la recolección.
+  
+- El análisis del dataset Global Cybersecurity Threats (2015–2024) muestra que el impacto de los ciberataques tiende a distribuirse de manera relativamente homogénea, sin evidenciar diferencias abismales entre países, industrias o tipos de ataque dentro del alcance de los datos disponibles. No obstante, es posible identificar ciertos focos de concentración —como GB, EEUU, Brasil e india  así como los sectores de banca e IT— que destacan de forma recurrente en términos de frecuencia, impacto económico y afectación social. Esto sugiere que las diferencias observadas deben interpretarse con cautela, pues la aparente uniformidad del fenómeno podría estar influida por limitaciones estructurales o sesgos del dataset. En consecuencia, los patrones identificados reflejan tendencias dentro del universo analizado, pero no necesariamente la magnitud real del fenómeno a escala global.
+
+- Los resultados evidencian que la relación entre la frecuencia de los ataques y su impacto económico o social no es lineal ni automática, sino que depende del nivel de agregación y de las variables consideradas. Mientras que, a nivel agregado, los tipos de ataque más frecuentes tienden a concentrar mayores pérdidas acumuladas, este patrón se diluye al incorporar dimensiones adicionales como la vulnerabilidad explotada o la fuente del ataque, revelando escenarios donde ataques menos comunes pueden generar impactos desproporcionadamente altos.
+
+- De manera consistente, el análisis operativo confirma la importancia crítica de la capacidad de respuesta: los ataques con menores tiempos promedio de resolución están asociados con menores pérdidas económicas, mientras que respuestas más lentas tienden a amplificar el daño financiero. Esto refuerza la idea de que, más allá de la prevención, la eficiencia en los mecanismos de defensa y mitigación juega un rol determinante en la reducción del impacto de los ciberataques, convirtiéndose en un factor estratégico clave para la gestión del riesgo cibernético.
 
 - 
 
