@@ -7,10 +7,10 @@
 3. [🎯 Objetivos e Hipótesis](#-objetivos-e-hipótesis)
 4. [📈 Plan de métricas KPI’s](#-plan-de-métricas-kpis)
 5. [🔍 EDA: Análisis Exploratorio de Datos](#-eda-análisis-exploratorio-de-datos)
-6. [🗂️ DER: Modelo Entidad Relacionales](#-der-modelo-entidad-relacionales)
-7. [🥈 Construcción capa Silver](#-construcción-capa-silver)
-8. [📊 Conexión y desarrollo en PowerBI](#-conexión-y-desarrollo-en-powerbi)
-9. [🧮 Medidas en DAX](#-medidas-en-dax)
+6. [🗂️ DER: Modelo Entidad Relación](#-der-modelo-entidad-relacion)
+7. [📊 Conexión y desarrollo en PowerBI](#-conexión-y-desarrollo-en-powerbi)
+8. [🧮 Medidas en DAX](#-medidas-en-dax)
+9. [Analísis y discusión de resultados](#-analisis-y-discuisón-de-resultados)
 10. [✅ Conclusiones](#-conclusiones)
 
 ---
@@ -59,10 +59,10 @@ Desarrollar un análisis de datos y un dashboard interactivo sobre ciberataques 
 - Crear un dashboard interactivo en Power BI.  
 
 ### Hipótesis
-- 📌 La mayoría de los ataques se concentran en pocos países.  
-- 💸 Los ataques más frecuentes generan mayores pérdidas económicas.  
-- 👥 Algunas industrias concentran mayor impacto social.  
-- 🛡️ Mejores tiempos de respuesta reducen pérdidas económicas promedio.  
+- 📌 Primera: La mayoría de los ataques se concentran en pocos países.  
+- 💸 Segunda:Los ataques más frecuentes generan mayores pérdidas económicas.  
+- 👥 Tercera:Algunas industrias concentran mayor impacto social.  
+- 🛡️ Cuarta: Mejores tiempos de respuesta reducen pérdidas económicas promedio.  
 
 ---
 
@@ -191,24 +191,297 @@ Se crearon **cinco tablas dimensionales en BigQuery** y con ellas la **tabla FAC
 A cada tabla se le asignó una columna adicional de **ID** que funcionó como *Primary Key* en la tabla FACT, esto por sugerencia del instructor y como forma de generar un análisis más limpio y preciso.  
 
 - **DIM_DATE**
-- ![Carga Bronze](images/dimdate.jpg) 
+- 
+- ![Carga Bronze](images/dimdate.jpg)
+
+```sql
+- CREATE OR REPLACE TABLE `bronzedianacortes.Cyberthreats_Silver.Dim_Date` AS
+SELECT DISTINCT
+    Year_ID
+FROM `bronzedianacortes.Cyberthreats_Silver.Amenazas_Globales_Silver`
+WHERE Anio IS NOT NULL;
+```
+
 - **DIM_PAIS**
-- ![Carga Bronze](images/dimpais.jpg) 
+- Con ella se buscó normalizar la información de países y asociar cada registro con un ID único.
+  Se crearon atributos adicionales como Continente e ISO, para facilitar joins consistentes con la FACT.
+- ![Carga Bronze](images/dimpais.jpg)
+
+```sql
+CREATE OR REPLACE TABLE `bronzedianacortes.Cyberthreats_Silver.DIM_Pais` AS
+SELECT
+    ROW_NUMBER() OVER (ORDER BY Pais) AS Pais_ID,
+    Pais,
+    Continente,
+    ISO
+FROM (
+    SELECT DISTINCT
+        Pais,
+        Continente,
+        ISO
+    FROM `bronzedianacortes.Cyberthreats_Silver.Amenazas_Globales_Silver`
+    WHERE Pais IS NOT NULL
+      AND Continente IS NOT NULL
+      AND ISO IS NOT NULL
+);
+
+```
+
 - **DIM_ATTACK**  
   - Para ataques, se tomaron tres categorías originales (*Tipo de ataque, Fuente del ataque, Tipo de vulnerabilidad*) y se fusionaron, asignando un código único a cada combinación distinta.
-  - ![Carga Bronze](images/dimataack.jpg) 
-  - Esto simplificó las dimensiones.  
+  - Consolida información relacionada con el ataque en una sola tabla: Tipo, Fuente y Vulnerabilidad.
+  - Cada ID representa la combinación única de los tres                                                                                        
+El ID de ataque permitió vincular de mejor maanera cada incidente de la FACT con su descripción detallada sin repetir datos.
+  - Esto también simplificó las dimensiones.
+  - se llevó a cabo como experimento con el fin de agregar análisis mas profundo a los al modelo. Las tres características juntas describen completamente la naturaleza de cada incidente.
+  - Al consolidarlas en un solo ID, se evita la duplicación de información en la FACT y se facilita el análisis multidimensional de los ataques, permitiendo identificar patrones, tendencias y relaciones entre distintos tipos de amenazas de manera consistente y eficiente.
+  - ![Carga Bronze](images/dimataack.jpg)
+
+ ```sql
+CREATE OR REPLACE TABLE `bronzedianacortes.Cyberthreats_Silver.DIM_Ataque` AS
+SELECT
+    ROW_NUMBER() OVER (
+        ORDER BY Tipo_Ataque, Fuente_Ataque, Vulnerabilidad
+    ) AS Ataque_ID,
+    Tipo_Ataque,
+    Fuente_Ataque,
+    Vulnerabilidad
+FROM (
+    SELECT DISTINCT
+        Tipo_Ataque,
+        Fuente_Ataque,
+        Vulnerabilidad
+    FROM `bronzedianacortes.Cyberthreats_Silver.Amenazas_Globales_Silver`
+    WHERE Tipo_Ataque IS NOT NULL
+      AND Fuente_Ataque IS NOT NULL
+      AND Vulnerabilidad IS NOT NULL
+);
+
+```
+  
 - **DIM_DEFENSA**
-- ![Carga Bronze](images/dimdefensa.jpg) 
+
+  Enumera los mecanismos de defensa posibles y asigna un ID a cada uno.
+Su sentido es permitir que la FACT pueda referenciar los mecanismos de defensa sin repetir nombres largos, manteniendo consistencia.
+- ![Carga Bronze](images/dimdefensa.jpg)
+
+```sql
+CREATE OR REPLACE TABLE `bronzedianacortes.Cyberthreats_Silver.DIM_Defensa` AS
+SELECT
+    ROW_NUMBER() OVER (ORDER BY Mecanismo_Defensa) AS Defensa_ID,
+    Mecanismo_Defensa
+FROM (
+    SELECT DISTINCT
+        Mecanismo_Defensa
+    FROM `bronzedianacortes.Cyberthreats_Silver.Amenazas_Globales_Silver`
+    WHERE Mecanismo_Defensa IS NOT NULL
+);
+```
 - **DIM_INDUSTRIA**
+
+- Centraliza todas las industrias afectadas y asigna un ID único a cada una.
+Esto ayuda a la FACT a referenciar la industria de manera consistente.
 - ![Carga Bronze](images/dimindustria.jpg) 
 
+```sql
+CREATE OR REPLACE TABLE `bronzedianacortes.Cyberthreats_Silver.DIM_Industria` AS
+SELECT
+    ROW_NUMBER() OVER (ORDER BY Industria) AS Industria_ID,
+    Industria
+FROM (
+    SELECT DISTINCT
+        Industria
+    FROM `bronzedianacortes.Cyberthreats_Silver.Amenazas_Globales_Silver`
+    WHERE Industria IS NOT NULL
+);
+```
 ---
 
 ## ⭐ Tabla FACT (Hechos)
 
 - La tabla `FACT_Cyberthreats` centraliza los datos y los relaciona con las diferentes tablas dimensionales por medio de las claves asignadas.  
-- La construcción de esta tabla fue esencial para estructurar el **modelo estrella** de análisis de datos, ya que permitió transformar un dataset disperso y heterogéneo en un esquema sólido, relacional y listo para explorar tendencias, patrones de ataque y efectos económicos y sociales dentro del panorama de amenazas cibernéticas.  
+- La construcción de esta tabla fue esencial para estructurar el **modelo estrella** de análisis de datos, ya que permitió crear un esquema sólido, relacional y para explorar tendencias, patrones de ataque y efectos económicos y sociales dentro del panorama de amenazas cibernéticas.  
 - Se agregaron columnas con título **“raw”** para identificar cada uno de los nombres y categorías a las que se les había asignado un ID.  
 
-![Tabla FACT](images/fact-cyberthreats.png)
+![Tabla FACT](images/fact-tablafact.jpg)
+
+```sql
+CREATE OR REPLACE TABLE `bronzedianacortes.Cyberthreats_Silver.FACT_CYBERTHREATS` AS
+SELECT
+    -- Claves de dimensiones
+    p.Pais_ID            AS country_id,
+    s.Anio               AS Year_ID,
+    a.Ataque_ID          AS attack_id,
+    i.Industria_ID       AS industria_id,
+    d.Defensa_ID         AS defensa_id,
+
+    -- Métricas
+    s.Perdida_Millones_USD,
+    s.Usuarios_Afectados,
+    s.Tiempo_Resolucion_Horas,
+
+    -- Campos raw (tal cual se conservaron)
+    s.Pais               AS country_name_raw,
+    s.Anio               AS year_raw,
+    s.Tipo_Ataque        AS attack_type_raw,
+    s.Fuente_Ataque      AS source_raw,
+    s.Vulnerabilidad     AS vulnerability_raw,
+    s.Industria          AS industry_raw,
+    s.Mecanismo_Defensa  AS defense_raw
+
+FROM `bronzedianacortes.Cyberthreats_Silver.Amenazas_Globales_Silver` s
+
+LEFT JOIN `bronzedianacortes.Cyberthreats_Silver.DIM_Pais` p
+  ON s.Pais = p.Pais
+ AND s.Continente = p.Continente
+ AND s.ISO = p.ISO
+
+LEFT JOIN `bronzedianacortes.Cyberthreats_Silver.DIM_Ataque` a
+  ON s.Tipo_Ataque = a.Tipo_Ataque
+ AND s.Fuente_Ataque = a.Fuente_Ataque
+ AND s.Vulnerabilidad = a.Vulnerabilidad
+
+LEFT JOIN `bronzedianacortes.Cyberthreats_Silver.DIM_Industria` i
+  ON s.Industria = i.Industria
+
+LEFT JOIN `bronzedianacortes.Cyberthreats_Silver.DIM_Defensa` d
+  ON s.Mecanismo_Defensa = d.Mecanismo_Defensa;
+```
+
+# 6. 🗂️ Modelo Entidad Relación
+
+- ![Carga Bronze](images/DER.png)
+
+ # 7. 🗂️ Conexión y desarrollo en PowerBI
+
+### 📥 Tablas importadas
+
+Power BI se conectó directamente al proyecto de BigQuery e importó las siguientes tablas:
+
+- 📊 **Tabla FACT**
+  - `FACT_CYBERTHREATS`
+- 📐 **Tablas de dimensiones**
+  - `DIM_PAIS`
+  - `DIM_DATE`
+  - `DIM_ATTACK`
+  - `DIM_INDUSTRIA`
+  - `DIM_DEFENSA`
+ 
+  - - - ![Carga Bronze](images/PB1.png)
+- En la tabla de ataques se creó una columa adicional que asigna un nombre combinado a cada ID.
+- Esto con el fin de que cada código también sea reconocido desde el atque, fuente y vulnerabilidad que representa, sin crear confusión y para facilitar su graficación
+- ![Carga Bronze](images/PB4.png)
+
+- la tabla de fecha, que e este caso represneta la DIM_DATE generó algunos problemas de formato por lo qe se le asignó valor de numro entero, esto, sin mebargo, no interfiri´mayormente en este modelo de análisis
+- ![Carga Bronze](images/PB3.png)
+---
+
+### 🔗 Modelo entidad–relación
+
+- La tabla `FACT_CYBERTHREATS` actúa como tabla central.
+- Todas las dimensiones se conectan mediante claves sustitutas (`*_id`).
+- Las relaciones son de tipo **uno a muchos (1:N)** desde las dimensiones hacia la tabla fact.
+-  ![Carga Bronze](images/PB2.png)
+- Se creó además una tabla adicional con las medidas, esta no va conectada al modelo
+- - - ![Carga Bronze](images/PBMEDIDAS.png)
+---
+
+## 8. 🧮 Medidas DAX
+
+Los cálculos se implementaron mediante **medidas DAX**, 
+
+### 📈 Principales Métricas de Incidencia
+
+**Total de ataques**
+```DAX
+Total Ataques = COUNTROWS(FACT_CYBERTHREATS)
+```
+**Ataques por año**
+```DAX
+Ataques por Año = COUNTROWS(FACT_CYBERTHREATS)
+```
+**YoY Crecimiento Ataques** 
+```DAX
+Crecimiento Ataques YoY =
+DIVIDE(
+    [Total Ataques] -
+    CALCULATE([Total Ataques], SAMEPERIODLASTYEAR(DIM_DATE[Year_ID])),
+    CALCULATE([Total Ataques], SAMEPERIODLASTYEAR(DIM_DATE[Year_ID]))
+)
+```
+
+**Distribución: porcentaje de ataques por país** 
+```DAX
+% Ataques por País =
+DIVIDE(
+    [Total Ataques],
+    CALCULATE([Total Ataques], ALL(DIM_PAIS))
+)
+```
+### 👥 Métricas Sociales
+
+**Total de usuarios afectados**
+```DAX
+Impacto Humano por Ataque =
+SUM(FACT_CYBERTHREATS[Usuarios_Afectados])
+```
+
+ℹ️ El dataset no permite identificar usuarios únicos; las métricas representan el total de usuarios reportados como afectados.
+
+### 🛡️ Métricas de Defensa
+
+**Tiempo promedio de resolución**
+``DAX
+Tiempo Promedio Resolución =
+AVERAGE(FACT_CYBERTHREATS[Tiempo_Resolucion_Horas])
+```
+
+**Tiempo de resolución por tipo de ataque**
+```DAX
+Tiempo Resolución por Ataque =
+AVERAGE(FACT_CYBERTHREATS[Tiempo_Resolucion_Horas])
+```
+
+**Tiempo de resolución por industria**
+```DAX
+Tiempo Resolución por Industria =
+AVERAGE(FACT_CYBERTHREATS[Tiempo_Resolucion_Horas])
+```
+
+### 📊 Diseño del Dashboard
+
+El dashboard se organizó en páginas temáticas:
+
+👥 Portada
+- - ![Carga Bronze](images/PB5.png)
+
+📈 Incidencia
+- - ![Carga Bronze](images/PB6.png)
+💰 Impacto económico y social
+
+🛡️ Defensa
+
+Se utilizaron gráficos de barras, gráfios de líneas,treemap, gráficos circulares y tarjetas KPI.
+
+### Dashboard desde el enfoque gráfico y de diseño
+- se eligió un fondo oscuro alusivo a ciberseguridad, originario de Freepik
+
+- ### 📊 Análisis y discusión de resultados
+
+## Comprobación de las hipótesis
+
+- 💸 Segunda:Los ataques más frecuentes generan mayores pérdidas económicas.  
+- 👥 Tercera:Algunas industrias concentran mayor impacto social.  
+- 🛡️ Cuarta: Mejores tiempos de respuesta reducen pérdidas económicas promedio.  
+
+-📌 Primera:Aunque el dataset es limitado y no permite afirmar diferencias abismales entre países, sí muestra que existen algunos países donde los ataques se concentran de manera notable. Los datos reflejan que, dentro del alcance del estudio, el fenómeno se distribuye de forma muy uniforme, pero es posible identificar los países más afectados (EEUU, Brasil e India) como focos principales del ciberataque. Esto, sin embargo, hay que analizarlo con cuidado, pues puede indicar que los datos podrían estar sesgados o incompletos, y que los patrones reales podrían diferir significativamente si se contaran incidentes no reportados o en regiones fuera del dataset.
+
+
+- ### 📊 Conclusiones
+- 
+- Aunque el dataset es limitado y no permite extrapolar a nivel global con total certeza, los datos muestran que hay países que concentran un mayor número de incidentes. Esto permite identificar focos principales de ciberataques.
+- 
+- Se evidencia uniformidad relativa del fenómeno dentro del alcance de la muestra, lo que resepresenta un llamado a verificar que no se hayan presnetado sesgos en la recolección.
+
+- 
+
