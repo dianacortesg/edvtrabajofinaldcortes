@@ -475,13 +475,50 @@ El dashboard se organizó en páginas temáticas:
 
 - - ![Carga Bronze](images/INCIDENCIA.png)
  
-  - El gráfico de crecimiento interanual permite identificar cómo varía, en términos porcentuales, la frecuencia de ataques o las pérdidas económicas de un año a otro, facilitando la detección de tendencias de aumento o desaceleración.
- 
-  - - - ![Carga Bronze](images/botonbarras.png)- ![Carga Bronze](images/INTERANUAL.png)
+-Distribución geográfica
+Los ataques presentan una alta concentración en economías digitalmente maduras, lideradas por Reino Unido, Brasil e India. La diferencia entre países es relativamente estrecha, lo que sugiere un riesgo cibernético globalizado más que fenómenos aislados por región.
+
+![Carga Bronze](images/incidencia 1.png)
+
+-Evolución temporal
+El número de ataques muestra una tendencia volátil pero estructuralmente alta a lo largo del tiempo. Se observan picos significativos en 2017, 2020 y 2023, intercalados con caídas pronunciadas (especialmente en 2019), lo que indica eventos disruptivos puntuales más que un crecimiento lineal sostenido.
+
+![Carga Bronze](images/incidencia2.png)
+
+-Crecimiento interanual
+El crecimiento interanual alterna entre expansiones y contracciones, evidenciando alta variabilidad.
+
+![Carga Bronze](images/incidencia3.png)
+
+-Distribución por industria
+La incidencia por sector es notablemente homogénea, con porcentajes cercanos al 14–16 % en todas las industrias analizadas. IT lidera pero la baja dispersión indica que ningún sector está significativamente más expuesto, reforzando la naturaleza transversal del riesgo cibernético.
+
+![Carga Bronze](images/incidencia4.png)
  
 💰 Impacto económico y social
 
 - - ![Carga Bronze](images/SOCIO.png)
+
+- - ![Carga Bronze](images/socio1.png)
+  - Pérdidas económicas por país y tipo de ataque
+Las pérdidas en USD muestran alta dispersión entre países y vectores de ataque, con DDoS, Ransomware y SQL Injection concentrando los mayores impactos financieros. Esto sugiere que los ataques a infraestructura crítica y disponibilidad generan costos significativamente más elevados que los ataques puramente informativos.
+
+- - ![Carga Bronze](images/socio2.png)
+-Promedio de pérdidas por tipo de ataque
+El promedio de pérdidas es relativamente homogéneo, con valores cercanos entre sí (≈58–62 USD por evento). Esta baja variabilidad indica que, independientemente del vector, los ataques tienden a generar costos recurrentes y previsibles, más asociados a mitigación y recuperación que a eventos extremos aislados.
+
+- - ![Carga Bronze](images/socio3.png)
+-Variación interanual de pérdidas
+La variación interanual presenta picos pronunciados, especialmente en 2017 y 2020, lo que evidencia shocks económicos asociados a contextos específicos. Posteriormente, la volatilidad disminuye, sugiriendo una posible mejor adaptación organizacional frente a incidentes cibernéticos.
+
+-Usuarios afectados por país
+El número de usuarios afectados es elevado y consistente entre países, reforzando el carácter masivo y acumulativo del impacto social. Las diferencias observadas reflejan tanto el tamaño poblacional como el grado de digitalización.
+
+-Usuarios afectados por tipo de ataque
+Los ataques DDoS y Ransomware concentran la mayor cantidad de usuarios afectados, confirmando que los ataques orientados a interrupción de servicios tienen un impacto social superior frente a ataques más focalizados.
+
+-Usuarios afectados por industria
+IT, Retail y Banking lideran en número de usuarios afectados, lo que evidencia una exposición sistémica de sectores intensivos en datos y transacciones. La distribución confirma que el riesgo cibernético es transversal, pero con mayor externalidad social en sectores de alta interacción con usuarios finales.
 
 🛡️ Defensa
 - - ![Carga Bronze](images/DEF.png)
