@@ -499,9 +499,10 @@ La incidencia por sector es notablemente homogénea, con porcentajes cercanos al
 
 - - ![Carga Bronze](images/SOCIO.png)
 
-- - ![Carga Bronze](images/socio1.png)
+
   - Pérdidas económicas por país y tipo de ataque
 Las pérdidas en USD muestran alta dispersión entre países y vectores de ataque, con DDoS, Ransomware y SQL Injection concentrando los mayores impactos financieros. Esto sugiere que los ataques a infraestructura crítica y disponibilidad generan costos significativamente más elevados que los ataques puramente informativos.
+- - ![Carga Bronze](images/socio1.png)
 
 - - ![Carga Bronze](images/socio2.png)
 -Promedio de pérdidas por tipo de ataque
