@@ -12,7 +12,6 @@
 8. [🧮 Medidas en DAX](#-medidas-en-dax)
 9. [Analísis y discusión de resultados](#-analisis-y-discuision-de-resultados)
 10. [✅ Conclusiones](#-conclusiones)
-11. [✅ LINKS](#-LINKS)
     
 
 ---
@@ -552,7 +551,4 @@ Se utilizaron gráficos de barras, gráfios de líneas,treemap, gráficos circul
 - Los resultados evidencian que la relación entre la frecuencia de los ataques y su impacto económico o social no es lineal ni automática, sino que depende del nivel de agregación y de las variables consideradas. Mientras que, a nivel agregado, los tipos de ataque más frecuentes tienden a concentrar mayores pérdidas acumuladas, este patrón se diluye al incorporar dimensiones adicionales como la vulnerabilidad explotada o la fuente del ataque, revelando escenarios donde ataques menos comunes pueden generar impactos desproporcionadamente altos.
 
 - De manera consistente, el análisis operativo confirma la importancia crítica de la capacidad de respuesta: los ataques con menores tiempos promedio de resolución están asociados con menores pérdidas económicas, mientras que respuestas más lentas tienden a amplificar el daño financiero. Esto refuerza la idea de que, más allá de la prevención, la eficiencia en los mecanismos de defensa y mitigación juega un rol determinante en la reducción del impacto de los ciberataques, convirtiéndose en un factor estratégico clave para la gestión del riesgo cibernético.
-
-- ### 11. 📊 LINKS
-- DIANAEDVFINAL.pbix
 
