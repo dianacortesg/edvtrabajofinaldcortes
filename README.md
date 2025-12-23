@@ -454,12 +454,15 @@ AVERAGE(FACT_CYBERTHREATS[Tiempo_Resolucion_Horas])
 El dashboard se organizó en páginas temáticas:
 
 👥 Portada
+
 ![Carga Bronze](images/PB5.png)
  
   - 👥 overview
  
   - ![Carga Bronze](images/PB6.png)
+  - 
  - MAPA GEOGRAFICO : Gráfico de Muestra la proporción de ataques cibernéticos registrados en cada país respecto al total, permitiendo comparar su peso relativo dentro del conjunto analizado.
+ - 
  - ![Carga Bronze](images/3EFFE9A7-68DD-4346-A51B-EAE2091AED16.jpeg) ![Carga Bronze](images/MUNDO.png)
 
 - TARJETAS KPI : se incluyen para mostrar de forma inmediata y clara los indicadores y m´tericas claves y más importantes, permitiendo tener un vistazo general.
