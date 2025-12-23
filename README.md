@@ -480,7 +480,7 @@ El dashboard se organizó en páginas temáticas:
 -Distribución geográfica
 Los ataques presentan una alta concentración en economías digitalmente maduras, lideradas por Reino Unido, Brasil e India. La diferencia entre países es relativamente estrecha, lo que sugiere un riesgo cibernético globalizado más que fenómenos aislados por región.
 
-![Carga Bronze](images/incidencia 1.png)
+![Carga Bronze](images/incidencia1.png)
 
 -Evolución temporal
 El número de ataques muestra una tendencia volátil pero estructuralmente alta a lo largo del tiempo. Se observan picos significativos en 2017, 2020 y 2023, intercalados con caídas pronunciadas (especialmente en 2019), lo que indica eventos disruptivos puntuales más que un crecimiento lineal sostenido.
