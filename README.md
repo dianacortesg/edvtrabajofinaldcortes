@@ -458,6 +458,8 @@ El dashboard se organizó en páginas temáticas:
 ![Carga Bronze](images/PB5.png)
  
   - 👥 overview
+
+  - Se utilizaron gráficos de barras, gráfios de líneas,treemap, gráficos circulares y tarjetas KPI.
  
   - ![Carga Bronze](images/PB6.png)
   - 
@@ -504,13 +506,16 @@ La incidencia por sector es notablemente homogénea, con porcentajes cercanos al
 
   - **Pérdidas económicas por país y tipo de ataque**
 Las pérdidas en USD muestran alta dispersión entre países y vectores de ataque, con DDoS, Ransomware y SQL Injection concentrando los mayores impactos financieros. Esto sugiere que los ataques a infraestructura crítica y disponibilidad generan costos significativamente más elevados que los ataques puramente informativos.
-- - ![Carga Bronze](images/socio1.png)
+
+-  ![Carga Bronze](images/socio1.png)
 
 - - ![Carga Bronze](images/socio2.png)
+  - 
 -**Promedio de pérdidas por tipo de ataque**
 El promedio de pérdidas es relativamente homogéneo, con valores cercanos entre sí (≈58–62 USD por evento). Esta baja variabilidad indica que, independientemente del vector, los ataques tienden a generar costos recurrentes y previsibles, más asociados a mitigación y recuperación que a eventos extremos aislados.
 
 - - ![Carga Bronze](images/socio3.png)
+  - 
 -**Variación interanual de pérdidas**
 La variación interanual presenta picos pronunciados, especialmente en 2017 y 2020, lo que evidencia shocks económicos asociados a contextos específicos. Posteriormente, la volatilidad disminuye, sugiriendo una posible mejor adaptación organizacional frente a incidentes cibernéticos.
 
@@ -530,7 +535,6 @@ IT, Retail y Banking lideran en número de usuarios afectados, lo que evidencia 
   - 
   - - - ![Carga Bronze](images/botonmatriz.png) - ![Carga Bronze](images/heatmaps.png)
   - 
-Se utilizaron gráficos de barras, gráfios de líneas,treemap, gráficos circulares y tarjetas KPI.
 
 ### Dashboard desde el enfoque gráfico y de diseño
 - se eligió un fondo oscuro alusivo a ciberseguridad, originario de Freepik
@@ -539,13 +543,13 @@ Se utilizaron gráficos de barras, gráfios de líneas,treemap, gráficos circul
 
 ## Comprobación de las hipótesis
  
--📌 Primera:Aunque el dataset es limitado y no permite afirmar diferencias abismales entre países, sí muestra que existen algunos países donde los ataques se concentran de manera notable. Los datos reflejan que, dentro del alcance del estudio, el fenómeno se distribuye de forma muy uniforme, pero es posible identificar los países más afectados (EEUU, Brasil e India) como focos principales del ciberataque. Esto, sin embargo, hay que analizarlo con cuidado, pues puede indicar que los datos podrían estar sesgados o incompletos, y que los patrones reales podrían diferir significativamente si se contaran incidentes no reportados o en regiones fuera del dataset.
+-📌 **Primera**:Aunque el dataset es limitado y no permite afirmar diferencias abismales entre países, sí muestra que existen algunos países donde los ataques se concentran de manera notable. Los datos reflejan que, dentro del alcance del estudio, el fenómeno se distribuye de forma muy uniforme, pero es posible identificar los países más afectados (EEUU, Brasil e India) como focos principales del ciberataque. Esto, sin embargo, hay que analizarlo con cuidado, pues puede indicar que los datos podrían estar sesgados o incompletos, y que los patrones reales podrían diferir significativamente si se contaran incidentes no reportados o en regiones fuera del dataset.
 
--💸 Segunda:La relación entre la frecuencia de los ataques y las pérdidas económicas solo se mantiene de forma consistente cuando se analiza el Tipo de Ataque de manera individual. En este nivel, los ataques más comunes concentran mayores pérdidas acumuladas. Sin embargo, al incorporar variables adicionales como la vulnerabilidad y la fuente del ataque, esta relación se diluye: algunos ataques frecuentes presentan pérdidas bajas, mientras que ataques menos comunes generan impactos económicos elevados. Esto evidencia que la relación entre frecuencia e impacto económico depende significativamente del nivel de granularidad del análisis.
+-💸 **Segunda**:La relación entre la frecuencia de los ataques y las pérdidas económicas solo se mantiene de forma consistente cuando se analiza el Tipo de Ataque de manera individual. En este nivel, los ataques más comunes concentran mayores pérdidas acumuladas. Sin embargo, al incorporar variables adicionales como la vulnerabilidad y la fuente del ataque, esta relación se diluye: algunos ataques frecuentes presentan pérdidas bajas, mientras que ataques menos comunes generan impactos económicos elevados. Esto evidencia que la relación entre frecuencia e impacto económico depende significativamente del nivel de granularidad del análisis.
 
--👥Tercera: La tercera hipótesis se ve respaldada parcialmente, ya que el análisis del mapa de calor evidencia una mayor concentración del impacto social en los sectores de banking e IT. No obstante, las diferencias observadas respecto a los demás sectores no presentan una magnitud suficientemente elevada como para afirmar una brecha estadísticamente significativa, lo que sugiere una distribución relativamente homogénea del impacto social entre los distintos sectores analizados.
+-👥 **Tercera**: La tercera hipótesis se ve respaldada parcialmente, ya que el análisis del mapa de calor evidencia una mayor concentración del impacto social en los sectores de banking e IT. No obstante, las diferencias observadas respecto a los demás sectores no presentan una magnitud suficientemente elevada como para afirmar una brecha estadísticamente significativa, lo que sugiere una distribución relativamente homogénea del impacto social entre los distintos sectores analizados.
 
--🛡️Cuarta:El análisis de datos confirma que, dentro del conjunto analizado, existe una relación consistente entre los tiempos de resolución de los ataques y las pérdidas económicas promedio asociadas. Se observa que aquellos ataques que presentan menores tiempos promedio de resolución tienden a estar asociados con un menor impacto económico, mientras que los ataques con tiempos de respuesta más prolongados muestran, en promedio, pérdidas económicas más elevadas. En el caso de EEUU, con el menor tiempo de resolucion de 35,3H, las pérdidas oscilan ntre los 14.812 MILL USD mientras que Brasil, co el mayor tiempo 37,7H, presenta pérdidas de 15.782 Mill USD.
+-🛡️ **Cuarta**:El análisis de datos confirma que, dentro del conjunto analizado, existe una relación consistente entre los tiempos de resolución de los ataques y las pérdidas económicas promedio asociadas. Se observa que aquellos ataques que presentan menores tiempos promedio de resolución tienden a estar asociados con un menor impacto económico, mientras que los ataques con tiempos de respuesta más prolongados muestran, en promedio, pérdidas económicas más elevadas. En el caso de EEUU, con el menor tiempo de resolucion de 35,3H, las pérdidas oscilan ntre los 14.812 MILL USD mientras que Brasil, co el mayor tiempo 37,7H, presenta pérdidas de 15.782 Mill USD.
 
 
 - ### 10. 📊 Conclusiones
