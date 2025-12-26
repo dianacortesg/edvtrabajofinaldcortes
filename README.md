@@ -230,12 +230,10 @@ FROM (
 
 - **DIM_ATTACK**  
   - Para ataques, se tomaron tres categorías originales (*Tipo de ataque, Fuente del ataque, Tipo de vulnerabilidad*) y se fusionaron, asignando un código único a cada combinación distinta.
-  - Consolida información relacionada con el ataque en una sola tabla: Tipo, Fuente y Vulnerabilidad.
-  - Cada ID representa la combinación única de los tres                                                                                        
-El ID de ataque permitió vincular de mejor maanera cada incidente de la FACT con su descripción detallada sin repetir datos.
-  - Esto también simplificó las dimensiones.
-  - se llevó a cabo como experimento con el fin de agregar análisis mas profundo a los al modelo. Las tres características juntas describen completamente la naturaleza de cada incidente.
-  - Al consolidarlas en un solo ID, se evita la duplicación de información en la FACT y se facilita el análisis multidimensional de los ataques, permitiendo identificar patrones, tendencias y relaciones entre distintos tipos de amenazas de manera consistente y eficiente.
+  - Esto ayudó a simplificar las dimensiones y a evitar la duplicación de información en la FACT y a facilitar el análisis multidimensional de los ataques, permitiendo identificar patrones, tendencias y relaciones entre distintos tipos de amenazas de manera más consistente y eficiente                                                                           
+- El ID de ataque permitió vincular de mejor maanera cada incidente de la FACT con su descripción detallada sin repetir datos.
+  - esta fusión se llevó a cabo como experimento con el fin de agregar análisis mas profundo a los al modelo. Las tres características juntas describen completamente la naturaleza de cada incidente.
+
   - ![Carga Bronze](images/dimataack.jpg)
 
  ```sql
