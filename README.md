@@ -533,7 +533,7 @@ IT, Retail y Banking lideran en número de usuarios afectados, lo que evidencia 
   - 
   - El heatmap en la matriz se incorporó para facilitar la identificación visual de patrones, concentraciones y contrastes entre categorías, permitiendo detectar rápidamente dónde se acumulan mayores valores de impacto o frecuencia sin necesidad de analizar cada cifra de forma individual.
   - 
-  - - - ![Carga Bronze](images/botonmatriz.png) - ![Carga Bronze](images/heatmaps.png)
+  - - - ![Carga Bronze](images/botonmatriz.png) - 
   - 
 
 ### Dashboard desde el enfoque gráfico y de diseño
